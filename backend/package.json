@@ -5,7 +5,8 @@
   "author": "Lucas Pessone <lucas.rmagalhaes@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "ci": "cd .. && yarn git-cz && cd backend"
   },
   "dependencies": {
     "express": "^4.17.1"
