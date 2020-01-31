@@ -51,7 +51,7 @@ class SessionController {
   }
 
   show(req, res) {
-    return res.json({ msg: 'You are authenticated', admin: req.isAdmin });
+    return res.json({ msg: 'You are authenticated' });
   }
 }
 
