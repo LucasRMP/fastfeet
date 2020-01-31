@@ -7,11 +7,11 @@ import SessionController from './app/controllers/SessionController';
 
 const router = new Router();
 
-router.post('/users', UserController.store);
-
 router.post('/auth', SessionController.store);
 
 router.use(auth);
+
+router.post('/users', UserController.store);
 
 // !ERROR: DELETE THIS BEFORE GO TO PRODUCTION
 router.get('/auth', SessionController.show);
