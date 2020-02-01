@@ -205,3 +205,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Tmp files
+tmp/uploads/*
