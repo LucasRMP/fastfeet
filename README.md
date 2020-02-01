@@ -1,8 +1,8 @@
 <h2 align='center'> 
   <img 
-    src="./git-assets/title.png" 
+    src="./.git-assets/logo.png" 
     alt="FastFeet"
-    width="200"
+    width="300"
   >
 </h2>
 
