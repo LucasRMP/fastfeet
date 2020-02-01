@@ -358,14 +358,7 @@ class DeliveryController {
       return res.status(400).json({ error: 'Delivery not found' });
     }
 
-    /**
-     * Check if the delivery has ended
-     */
-    if (delivery.end_date) {
-      return res.status(400).json({ error: 'The delivery has alredy ended' });
-    }
-
-    await delivery.update({ canceled_at: new Date() });
+    await delivery.destroy();
 
     return res.json({ ok: true });
   }
