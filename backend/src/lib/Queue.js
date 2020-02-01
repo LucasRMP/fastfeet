@@ -1,10 +1,11 @@
 import Bee from 'bee-queue';
 
 import newDeliveryMail from '../app/jobs/newDeliveryMail';
+import CancelDeliveryMail from '../app/jobs/CancelDeliveryMail';
 
 import redisConfig from '../config/redis';
 
-const jobs = [newDeliveryMail];
+const jobs = [newDeliveryMail, CancelDeliveryMail];
 
 class Queue {
   constructor() {
@@ -28,7 +29,6 @@ class Queue {
 
   processQueue() {
     jobs.forEach(job => {
-      console.log('Processing...', job.handle);
       const { bee, handle } = this.queues[job.key];
 
       bee.on('fail', this.handleFailure).process(handle);
