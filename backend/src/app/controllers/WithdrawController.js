@@ -1,4 +1,6 @@
 import * as yup from 'yup';
+import { startOfDay, endOfDay, parseISO, getHours } from 'date-fns';
+import { Op } from 'sequelize';
 
 import Deliveryman from '../models/Deliveryman';
 import Delivery from '../models/Delivery';
@@ -48,6 +50,34 @@ class WithdrawController {
      */
     if (delivery.start_date) {
       return res.status(400).json({ error: 'Delivery has alredy started' });
+    }
+
+    /**
+     * Check if start_date is valid
+     */
+    const parsedDate = parseISO(start_date);
+    const hour = getHours(parsedDate);
+    if (hour >= 18 || hour < 8) {
+      return res
+        .status(400)
+        .json({ error: 'Withdraw can only be done between 08:00 and 18:00' });
+    }
+
+    /**
+     * Check how many deliveries the deliveryman started today
+     */
+    const deliveries = await Delivery.findAll({
+      where: {
+        date_start: {
+          deliveryman_id: id,
+          [Op.between]: [startOfDay(parsedDate), endOfDay(parsedDate)],
+        },
+      },
+    });
+    if (deliveries.length >= 5) {
+      return res
+        .status(400)
+        .json({ error: 'A deliveryman can make only 5 withdraws a day' });
     }
 
     await delivery.update({ start_date });
