@@ -41,7 +41,7 @@ function SignIn() {
 
   return (
     <>
-      <img src={logo} alt="FastFeet" />
+      <img draggable={false} src={logo} alt="FastFeet" />
 
       <Form onSubmit={handleSubmit} noValidate>
         <label htmlFor="email">Seu e-mail</label>
