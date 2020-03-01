@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import './config/reactotron';
 
@@ -13,6 +14,7 @@ function App() {
     <Router history={history}>
       <Routes />
       <GlobalStyles />
+      <ToastContainer autoClose={2500} />
     </Router>
   );
 }

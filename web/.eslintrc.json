@@ -48,7 +48,8 @@
       }
     ],
     "react-hooks/rules-of-hooks": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/label-has-associated-control": "off"
   },
   "settings": {
     "import/resolver": {
