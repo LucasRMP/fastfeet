@@ -41,9 +41,7 @@ class SessionController {
     const admin = user.email === 'admin@fastfeet.com';
 
     return res.json({
-      id,
-      email,
-      name,
+      user: { id, email, name },
       token: jwt.sign({ id, admin }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       }),
