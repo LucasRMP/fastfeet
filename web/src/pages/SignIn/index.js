@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
+import { signInRequest } from '~/store/modules/auth/actions';
+import api from '~/services/api';
 import logo from '~/assets/fastfeet-logo@2x.png';
 
 const schema = yup.object().shape({
   email: yup
-    .string('Email must be a string')
-    .email('Email must be valid')
-    .required('Email is required'),
+    .string('O email deve ser uma string')
+    .email('O email deve ser válido')
+    .required('O email é obrigatório'),
   password: yup
-    .string('Password must be a string')
-    .required('Password is required'),
+    .string('A senha deve ser uma string')
+    .required('A senha é obrigatória'),
 });
 
+api.post('auth', { email: 'admin@fastfeet.com', password: '123456' });
 function SignIn() {
   const [errors, setErrors] = useState([]);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (errors.length) {
@@ -31,7 +37,9 @@ function SignIn() {
         abortEarly: false,
       });
 
-      console.tron.log(data);
+      const { email, password } = data;
+
+      dispatch(signInRequest(email, password));
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         setErrors(err.errors);

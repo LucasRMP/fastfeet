@@ -13,10 +13,10 @@ import SignIn from '~/pages/SignIn';
 function Routes() {
   return (
     <Switch>
-      <Route path="/" component={SignIn} exact />
+      <Route path="/" exact component={SignIn} />
 
-      <Route path="/dashboard" component={Dashboard} isPrivate />
-      <Route path="/deliverymen" component={Deliverymen} isPrivate />
+      <Route path="/dashboard" exact component={Dashboard} isPrivate />
+      <Route path="/deliverymen" exact component={Deliverymen} isPrivate />
       <Route path="/recipients" component={Recipients} isPrivate />
       <Route path="/problems" component={Problems} isPrivate />
     </Switch>
