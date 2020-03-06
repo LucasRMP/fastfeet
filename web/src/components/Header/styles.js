@@ -12,9 +12,13 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
+
+  user-select: none;
 `;
 
-export const Logo = styled.img`
+export const Logo = styled.img.attrs({
+  draggable: false,
+})`
   width: 135px;
   height: 26px;
   transition: filter 0.25s;
