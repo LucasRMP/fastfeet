@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { NavLink } from 'react-router-dom';
+
 export const Container = styled.div`
   background: #fff;
   border: 1px solid #ddd;
@@ -28,23 +30,25 @@ export const Nav = styled.nav`
   padding-left: 30px;
   border-left: 1px solid #ddd;
   padding: 5px 30px;
+`;
 
-  a {
-    font-weight: bolder;
-    font-size: 13px;
-    letter-spacing: 0;
-    text-transform: uppercase;
+export const Link = styled(NavLink).attrs({
+  activeStyle: { opacity: 1 },
+})`
+  font-weight: bolder;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: uppercase;
 
-    opacity: 0.5;
-    transition: opacity 0.3s;
+  opacity: 0.5;
+  transition: opacity 0.3s;
 
-    & + a {
-      margin-left: 20px;
-    }
+  & + a {
+    margin-left: 20px;
+  }
 
-    &:hover {
-      opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
   }
 `;
 

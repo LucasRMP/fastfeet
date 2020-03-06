@@ -5,7 +5,7 @@ function persistReducers(reducers) {
   const options = {
     key: 'fastfeet',
     storage,
-    whitelist: ['auth'],
+    whitelist: ['auth', 'user'],
   };
 
   const persistedReducer = persistReducer(options, reducers);
