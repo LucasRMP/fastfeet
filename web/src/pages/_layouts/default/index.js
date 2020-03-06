@@ -1,12 +1,15 @@
 import React from 'react';
 import PT from 'prop-types';
 
-import { Container, Wrapper } from './styles';
+import Header from '~/components/Header';
+
+import { Container } from './styles';
 
 function Default({ children }) {
   return (
     <Container>
-      <Wrapper>{children}</Wrapper>
+      <Header />
+      {children}
     </Container>
   );
 }
