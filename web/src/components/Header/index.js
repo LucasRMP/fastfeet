@@ -16,9 +16,7 @@ function Header() {
 
   return (
     <Container>
-      <Link to="/dashboard">
-        <Logo src={logo} />
-      </Link>
+      <Logo src={logo} />
       <Nav>
         <Link to="/dashboard" activeStyle={{ opacity: 1 }}>
           Encomendas
