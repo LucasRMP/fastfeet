@@ -32,4 +32,7 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+  table {
+    border-spacing: none;
+  }
 `;
