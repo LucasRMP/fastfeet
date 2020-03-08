@@ -2,9 +2,22 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 30px 60px;
   min-height: calc(100vh - 64px);
+`;
+
+export const Title = styled.strong`
+  font-size: 24px;
+  color: #444;
+  margin-bottom: 30px;
+`;
+
+export const PageController = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const DeliveryTable = styled.table`

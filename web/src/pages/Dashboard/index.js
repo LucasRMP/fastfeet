@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { MdAdd, MdSearch } from 'react-icons/md';
 
 import api from '~/services/api';
 
 import { formatId } from '~/utils/format';
 import { getStatus } from '~/utils/status';
 
-import { Container, DeliveryTable, Deliveryman, Status } from './styles';
+import Button from '~/components/Button';
+import Input from '~/components/Input';
+
+import {
+  Container,
+  Title,
+  PageController,
+  DeliveryTable,
+  Deliveryman,
+  Status,
+} from './styles';
 
 function Dashboard() {
   const [deliveries, setDeliveries] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const componentDidMount = async () => {
@@ -35,6 +47,25 @@ function Dashboard() {
 
   return (
     <Container>
+      <Title>Gerenciando Encomendas</Title>
+      <PageController>
+        <Input
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          action={() => console.log('pressed')}
+          placeholder="Buscar por encomendas"
+          icon={MdSearch}
+        />
+        <Button
+          onClick={() => console.log('pressed')}
+          icon={MdAdd}
+          background="#7D40E7"
+          color="#fff"
+        >
+          Cadastrar
+        </Button>
+      </PageController>
+
       <DeliveryTable>
         <thead>
           <tr>
