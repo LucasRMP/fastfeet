@@ -358,9 +358,47 @@ class DeliveryController {
       return res.status(400).json({ error: 'Delivery not found' });
     }
 
-    await delivery.destroy();
+    await delivery.update({
+      canceled_at: new Date(),
+    });
 
-    return res.json({ ok: true });
+    await delivery.reload({
+      attributes: ['id', 'product', 'start_date', 'canceled_at', 'end_date'],
+      include: [
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['name', 'email'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
+        },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'name',
+            'street',
+            'number',
+            'compliment',
+            'state',
+            'city',
+            'postal_code',
+          ],
+        },
+        {
+          model: File,
+          as: 'signature',
+          attributes: ['url', 'name', 'path'],
+        },
+      ],
+    });
+
+    return res.json({ delivery });
   }
 }
 
