@@ -7,7 +7,12 @@ function Input({ style, icon: Icon, action, ...rest }) {
   return (
     <Container style={style}>
       {Icon && <Icon size={20} color="#999" onClick={action} />}
-      <TInput {...rest} />
+      <TInput
+        {...rest}
+        onKeyDown={e => {
+          if (e.key === 'Enter') action();
+        }}
+      />
     </Container>
   );
 }
