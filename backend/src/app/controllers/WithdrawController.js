@@ -68,8 +68,8 @@ class WithdrawController {
      */
     const deliveries = await Delivery.findAll({
       where: {
-        date_start: {
-          deliveryman_id: id,
+        deliveryman_id: id,
+        start_date: {
           [Op.between]: [startOfDay(parsedDate), endOfDay(parsedDate)],
         },
       },
