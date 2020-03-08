@@ -126,6 +126,7 @@ class DeliveryController {
           attributes: ['url', 'name', 'path'],
         },
       ],
+      order: ['id'],
     });
 
     return res.json(deliveries);
