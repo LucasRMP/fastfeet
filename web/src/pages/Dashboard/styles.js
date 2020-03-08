@@ -24,6 +24,7 @@ export const DeliveryTable = styled.table`
   flex-direction: column;
   flex: 1;
   max-width: 1200px;
+  min-width: 977px;
   height: 100%;
   border-spacing: 0 30px;
 
@@ -33,6 +34,11 @@ export const DeliveryTable = styled.table`
     text-align: left;
     font-size: 16px;
     font-weight: bold;
+
+    &:last-of-type {
+      padding-left: 0;
+      text-align: center;
+    }
   }
 
   tbody td {
@@ -84,5 +90,12 @@ export const Status = styled.div`
     margin-right: 5px;
     border: 5px solid ${props => props.status.color};
     border-radius: 50%;
+  }
+`;
+
+export const ActionsContainer = styled.td`
+  width: 80px;
+  svg {
+    cursor: pointer;
   }
 `;

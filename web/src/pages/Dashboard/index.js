@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { MdAdd, MdSearch } from 'react-icons/md';
+import {
+  MdAdd,
+  MdSearch,
+  MdVisibility,
+  MdDeleteForever,
+  MdEdit,
+} from 'react-icons/md';
 
 import api from '~/services/api';
 
 import { formatId } from '~/utils/format';
 import { getStatus } from '~/utils/status';
 
+import Actions from '~/components/Actions';
 import Button from '~/components/Button';
 import Input from '~/components/Input';
 
@@ -17,6 +24,7 @@ import {
   DeliveryTable,
   Deliveryman,
   Status,
+  ActionsContainer,
 } from './styles';
 
 function Dashboard() {
@@ -52,12 +60,12 @@ function Dashboard() {
         <Input
           value={search}
           onChange={e => setSearch(e.target.value)}
-          action={() => console.log('pressed')}
+          action={() => console.log(search)}
           placeholder="Buscar por encomendas"
           icon={MdSearch}
         />
         <Button
-          onClick={() => console.log('pressed')}
+          onClick={() => console.log('btn pressed')}
           icon={MdAdd}
           background="#7D40E7"
           color="#fff"
@@ -102,7 +110,27 @@ function Dashboard() {
                   {delivery.status.text}
                 </Status>
               </td>
-              <td>...</td>
+              <ActionsContainer>
+                <Actions
+                  options={[
+                    {
+                      text: 'Visualizar',
+                      icon: <MdVisibility color="#8E5BE8" />,
+                      action: () => console.log('Visualizar'),
+                    },
+                    {
+                      text: 'Editar',
+                      icon: <MdEdit color="#4D85EE" />,
+                      action: () => console.log('Editar'),
+                    },
+                    {
+                      text: 'Excluir',
+                      icon: <MdDeleteForever color="#DE3B3B" />,
+                      action: () => console.log('Excluir'),
+                    },
+                  ]}
+                />
+              </ActionsContainer>
             </tr>
           ))}
         </tbody>
