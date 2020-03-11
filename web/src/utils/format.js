@@ -92,3 +92,11 @@ export function stateUfToName(UF) {
   }
   return name;
 }
+
+export function dateToLocale(date) {
+  return date
+    .split('T')[0]
+    .split('-')
+    .reverse()
+    .join('/');
+}

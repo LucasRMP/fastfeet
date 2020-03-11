@@ -38,9 +38,14 @@ export const Action = styled.div`
   align-items: center;
   padding: 10px;
   cursor: pointer;
+  transition: background 0.25s;
 
   & + div {
     border-top: 1px solid #eee;
+  }
+
+  &:hover {
+    background: #efefef;
   }
 `;
 

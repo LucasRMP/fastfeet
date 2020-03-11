@@ -5,5 +5,5 @@ export function getStatus(delivery) {
     return { text: 'Pendente', background: '#F0F0DF', color: '#C1BC35' };
   if (!delivery.end_date)
     return { text: 'Retirada', background: '#BAD2FF', color: '#4D85EE' };
-  return { text: 'Entregue', background: '#BAD2FF', color: '#2CA42B' };
+  return { text: 'Entregue', background: '#DFF0DF', color: '#2CA42B' };
 }
