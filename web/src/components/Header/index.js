@@ -18,7 +18,7 @@ function Header() {
     <Container>
       <Logo src={logo} />
       <Nav>
-        <Link to="/dashboard" activeStyle={{ opacity: 1 }}>
+        <Link to="/deliveries" activeStyle={{ opacity: 1 }}>
           Encomendas
         </Link>
         <Link to="/deliverymen" activeStyle={{ opacity: 1 }}>

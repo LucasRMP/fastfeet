@@ -6,7 +6,7 @@ import PT from 'prop-types';
 import DefaultLayout from '~/pages/_layouts/default';
 import AuthLayout from '~/pages/_layouts/auth';
 
-function RouteWrapper({ component: Component, isPrivate, ...rest }) {
+function RouteWrapper({ isPrivate, children, ...rest }) {
   const signed = useSelector(state => state.auth.signed);
 
   if (!signed && isPrivate) {
@@ -14,25 +14,20 @@ function RouteWrapper({ component: Component, isPrivate, ...rest }) {
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/deliveries" />;
   }
 
   const Layout = !signed ? AuthLayout : DefaultLayout;
 
   return (
-    <Route
-      {...rest}
-      render={props => (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      )}
-    />
+    <Route {...rest}>
+      <Layout>{children}</Layout>
+    </Route>
   );
 }
 
 RouteWrapper.propTypes = {
-  component: PT.oneOfType([PT.element, PT.func]).isRequired,
+  children: PT.oneOfType([PT.element, PT.func]).isRequired,
   isPrivate: PT.bool,
 };
 

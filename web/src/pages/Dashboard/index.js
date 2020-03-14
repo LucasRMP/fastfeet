@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { parseISO } from 'date-fns';
 import { toast } from 'react-toastify';
 import {
   MdAdd,
@@ -10,6 +9,7 @@ import {
 } from 'react-icons/md';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import { formatId, dateToLocale } from '~/utils/format';
 import { getStatus } from '~/utils/status';
@@ -79,49 +79,92 @@ function Dashboard() {
     setIsOpenedPopup(false);
   };
 
+  // TODO: Check if delivery is alredy canceled
+  const handleDelete = async id => {
+    try {
+      const { data } = await api.delete(`/delivery/${id}`);
+
+      setDeliveries(
+        deliveries.map(delivery => {
+          if (delivery.id === id) {
+            return {
+              ...data.delivery,
+              status: getStatus(data.delivery),
+              formattedId: formatId(data.delivery.id),
+              formattedStartDate: data.delivery.start_date
+                ? dateToLocale(data.delivery.start_date)
+                : '—',
+              formattedEndDate: data.delivery.end_date
+                ? dateToLocale(data.delivery.end_date)
+                : '—',
+              formattedCanceledAt: data.delivery.canceled_at
+                ? dateToLocale(data.delivery.canceled_at)
+                : '—',
+            };
+          }
+          return delivery;
+        })
+      );
+
+      toast.success('Entrega cancelada com sucesso!');
+    } catch (err) {
+      console.tron.error(err);
+      toast.error('Não foi possível cancelar a entrega');
+    }
+  };
+
+  const handleEdit = id => {
+    history.push(`/deliveries/${id}`);
+  };
+
+  // TODO: Load screen
+  if (!deliveries) return <></>;
+
   return (
     <Container>
       {selectedDelivery && (
         <Popup onClose={handleClosePopup} opened={isOpenedPopup}>
-          <DeliveryInfo>
-            {console.tron.log(selectedDelivery)}
-            <DeliveryTitle>Informações da encomenda</DeliveryTitle>
-            <p>
-              {selectedDelivery.recipient.street},{' '}
-              {selectedDelivery.recipient.number}
-            </p>
-            <p>
-              {selectedDelivery.recipient.city} -{' '}
-              {selectedDelivery.recipient.state}
-            </p>
-            <p>74810-160</p>
-          </DeliveryInfo>
-          <DeliveryDates>
-            <DeliveryTitle>Datas</DeliveryTitle>
+          <>
+            <DeliveryInfo>
+              {console.tron.log(selectedDelivery)}
+              <DeliveryTitle>Informações da encomenda</DeliveryTitle>
+              <p>
+                {selectedDelivery.recipient.street},{' '}
+                {selectedDelivery.recipient.number}
+              </p>
+              <p>
+                {selectedDelivery.recipient.city} -{' '}
+                {selectedDelivery.recipient.state}
+              </p>
+              <p>74810-160</p>
+            </DeliveryInfo>
+            <DeliveryDates>
+              <DeliveryTitle>Datas</DeliveryTitle>
 
-            <p>
-              <span>Entrega: </span>
-              {selectedDelivery.formattedEndDate}
-            </p>
-            <p>
-              <span>Retirada: </span>
-              {selectedDelivery.formattedStartDate}
-            </p>
-            <p>
-              <span>Cancelada em: </span>
-              {selectedDelivery.formattedCanceledAt}
-            </p>
-          </DeliveryDates>
+              <p>
+                <span>Entrega: </span>
+                {selectedDelivery.formattedEndDate}
+              </p>
+              <p>
+                <span>Retirada: </span>
+                {selectedDelivery.formattedStartDate}
+              </p>
+              <p>
+                <span>Cancelada em: </span>
+                {selectedDelivery.formattedCanceledAt}
+              </p>
+            </DeliveryDates>
 
-          {selectedDelivery.signature && (
-            <DeliverySignature>
-              <DeliveryTitle>Assinatura do destinatário</DeliveryTitle>
-              <img
-                src="http://localhost:3333/files/6b0180035bd03111e59541f60f25a430.png"
-                alt="signature"
-              />
-            </DeliverySignature>
-          )}
+            {selectedDelivery.signature && (
+              <DeliverySignature>
+                <DeliveryTitle>Assinatura do destinatário</DeliveryTitle>
+                <img
+                  src="http://localhost:3333/files/6b0180035bd03111e59541f60f25a430.png"
+                  alt="signature"
+                />
+              </DeliverySignature>
+            )}
+          </>
         </Popup>
       )}
       <Header>
@@ -192,12 +235,12 @@ function Dashboard() {
                     {
                       text: 'Editar',
                       icon: <MdEdit color="#4D85EE" />,
-                      action: () => console.log('Editar'),
+                      action: () => handleEdit(delivery.id),
                     },
                     {
                       text: 'Excluir',
                       icon: <MdDeleteForever color="#DE3B3B" />,
-                      action: () => console.log('Excluir'),
+                      action: () => handleDelete(delivery.id),
                     },
                   ]}
                 />

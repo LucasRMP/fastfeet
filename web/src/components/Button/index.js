@@ -27,7 +27,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   enabled: true,
-  icon: () => {},
+  icon: () => <></>,
   children: '',
 };
 
