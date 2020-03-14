@@ -42,6 +42,7 @@ router.use(auth);
 router.post('/users', UserController.store);
 
 router.post('/recipients', RecipientController.store);
+router.get('/recipients', RecipientController.index);
 router.put('/recipients/:id', RecipientController.update);
 
 router.post('/deliveryman', DeliverymanController.store);

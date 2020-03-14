@@ -3,6 +3,12 @@ import * as yup from 'yup';
 import Recipient from '../models/Recipient';
 
 class RecipientController {
+  async index(req, res) {
+    const recipients = await Recipient.findAll();
+
+    return res.status(200).json({ recipients });
+  }
+
   async store(req, res) {
     /**
      * Validate the request body
