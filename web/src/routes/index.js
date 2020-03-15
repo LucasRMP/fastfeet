@@ -4,8 +4,8 @@ import { Switch } from 'react-router-dom';
 import Route from './Route';
 
 import DeliveryRoutes from './Delivery.routes';
+import DeliverymenRoutes from './Deliverymen.routes';
 
-import Deliverymen from '~/pages/Deliverymen';
 import Problems from '~/pages/Problems';
 import Recipients from '~/pages/Recipients';
 
@@ -20,9 +20,8 @@ function Routes() {
 
       <DeliveryRoutes path="/deliveries" isPrivate />
 
-      <Route path="/deliverymen" exact isPrivate>
-        <Deliverymen />
-      </Route>
+      <DeliverymenRoutes path="/deliverymen" isPrivate />
+
       <Route path="/recipients" isPrivate>
         <Recipients />
       </Route>

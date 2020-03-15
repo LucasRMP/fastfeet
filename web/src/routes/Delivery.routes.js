@@ -1,4 +1,5 @@
 import React from 'react';
+import PT from 'prop-types';
 
 import Route from './Route';
 
@@ -17,5 +18,14 @@ function DeliveryRoutes({ path, isPrivate }) {
     </>
   );
 }
+
+DeliveryRoutes.propTypes = {
+  path: PT.string.isRequired,
+  isPrivate: PT.bool,
+};
+
+DeliveryRoutes.defaultProps = {
+  isPrivate: false,
+};
 
 export default DeliveryRoutes;

@@ -53,7 +53,6 @@ function DeliveryUpdate() {
         setDeliverymen(deliverymenRes.data.deliverymans);
         setRecipients(recipientRes.data.recipients);
       } catch (err) {
-        console.tron.error(err);
         toast.error('Ocorreu um erro ao carregar a página');
         history.push('/deliveries');
       }
@@ -61,14 +60,12 @@ function DeliveryUpdate() {
     componentDidMount();
   }, [deliveryId]);
 
-  useEffect(() => {
-    console.tron.log({ delivery });
-  }, [delivery]);
-
   const handleSubmit = async () => {
-    const res = await api.put(`/delivery/${deliveryId}`, delivery);
-
-    console.tron.log({ res });
+    try {
+      await api.put(`/delivery/${deliveryId}`, delivery);
+    } catch (err) {
+      toast.error('Não foi possível atualizar a entrega');
+    }
   };
 
   // TODO: Loading screen

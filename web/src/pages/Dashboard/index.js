@@ -61,7 +61,6 @@ function Dashboard() {
           }))
         );
       } catch (err) {
-        console.tron.error(err);
         toast.error('Não foi possivel carregar as entregas');
       }
     };
@@ -108,7 +107,6 @@ function Dashboard() {
 
       toast.success('Entrega cancelada com sucesso!');
     } catch (err) {
-      console.tron.error(err);
       toast.error('Não foi possível cancelar a entrega');
     }
   };
@@ -126,7 +124,6 @@ function Dashboard() {
         <Popup onClose={handleClosePopup} opened={isOpenedPopup}>
           <>
             <DeliveryInfo>
-              {console.tron.log(selectedDelivery)}
               <DeliveryTitle>Informações da encomenda</DeliveryTitle>
               <p>
                 {selectedDelivery.recipient.street},{' '}
