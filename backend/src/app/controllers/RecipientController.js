@@ -9,6 +9,17 @@ class RecipientController {
     return res.status(200).json({ recipients });
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+    if (!recipient) {
+      return res.status(400).json({ error: 'Recipient not found' });
+    }
+
+    return res.status(200).json(recipient);
+  }
+
   async store(req, res) {
     /**
      * Validate the request body
@@ -94,6 +105,19 @@ class RecipientController {
       name,
       address: { street, number, compliment, state, city, postal_code },
     });
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+    const recipient = await Recipient.findByPk(id);
+
+    if (!recipient) {
+      return res.status(400).json({ error: 'User not found' });
+    }
+
+    await recipient.destroy();
+
+    return res.status(200).json(recipient);
   }
 }
 
