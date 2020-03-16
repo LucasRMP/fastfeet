@@ -202,17 +202,19 @@ function Dashboard() {
             <tr key={delivery.id}>
               <td>{delivery.formattedId}</td>
               <td>{delivery.recipient.name}</td>
-              <Deliveryman>
-                <img
-                  src={
-                    delivery.deliveryman.avatar
-                      ? delivery.deliveryman.avatar.url
-                      : `https://api.adorable.io/avatars/40/${delivery.deliveryman.email}.png`
-                  }
-                  alt={delivery.deliveryman.name}
-                />
-                <strong>{delivery.deliveryman.name}</strong>
-              </Deliveryman>
+              {delivery.deliveryman && (
+                <Deliveryman>
+                  <img
+                    src={
+                      delivery.deliveryman.avatar
+                        ? delivery.deliveryman.avatar.url
+                        : `https://api.adorable.io/avatars/40/${delivery.deliveryman.email}.png`
+                    }
+                    alt={delivery.deliveryman.name}
+                  />
+                  <strong>{delivery.deliveryman.name}</strong>
+                </Deliveryman>
+              )}
               <td>{delivery.recipient.city}</td>
               <td>{delivery.recipient.state}</td>
               <td>

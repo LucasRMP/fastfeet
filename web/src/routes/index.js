@@ -5,6 +5,7 @@ import Route from './Route';
 
 import DeliveryRoutes from './Delivery.routes';
 import DeliverymenRoutes from './Deliverymen.routes';
+import RecipientRoutes from './Recipient.routes';
 
 import Problems from '~/pages/Problems';
 import Recipients from '~/pages/Recipients';
@@ -22,9 +23,8 @@ function Routes() {
 
       <DeliverymenRoutes path="/deliverymen" isPrivate />
 
-      <Route path="/recipients" isPrivate>
-        <Recipients />
-      </Route>
+      <RecipientRoutes path="/recipients" isPrivate />
+
       <Route path="/problems" isPrivate>
         <Problems />
       </Route>

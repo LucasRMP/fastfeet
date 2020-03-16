@@ -21,7 +21,7 @@ import {
   ActionsContainer,
 } from './styles';
 
-function Dashboard() {
+function Deliverymen() {
   const [deliverymen, setDeliverymen] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -144,4 +144,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Deliverymen;
