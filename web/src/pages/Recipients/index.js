@@ -28,7 +28,6 @@ function Recipients() {
     const componentDidMount = async () => {
       try {
         const { data } = await api.get('/recipients');
-        console.tron.log({ data });
         setRecipients(
           data.recipients.map(recipient => ({
             ...recipient,

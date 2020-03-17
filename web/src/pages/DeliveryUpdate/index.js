@@ -90,7 +90,7 @@ function DeliveryUpdate() {
             background="#7D40E7"
             color="#fff"
           >
-            Cadastrar
+            Salvar
           </Button>
         </PageController>
       </Header>
